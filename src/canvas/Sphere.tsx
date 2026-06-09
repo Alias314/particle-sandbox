@@ -1,0 +1,39 @@
+import sphereVertexShader from '../shaders/sphere/sphereVertexShader.glsl';
+import sphereFragmentShader from '../shaders/sphere/sphereFragmentShader.glsl';
+import { useFrame, useThree } from '@react-three/fiber';
+import { useRef } from 'react';
+import { Raycaster } from 'three';
+import { sphere } from '../const/particleAttributes';
+
+export default function Sphere({ id, particleAttributes, backgroundRef }) {
+  const meshRef = useRef();
+  const { pointer, camera } = useThree();
+  const raycaster = new Raycaster();
+  let intersects = [];
+
+  useFrame(() => {
+    if (!meshRef.current || !backgroundRef.current) return;
+
+    raycaster.setFromCamera(pointer, camera);
+    intersects = raycaster.intersectObject(backgroundRef.current, true);
+    const intersectPos = intersects[0].point;
+    meshRef.current.position.copy(intersectPos);
+    particleAttributes.sphere[id].position.copy(meshRef.current.position);
+  });
+
+  return (
+    <mesh
+      key={sphereVertexShader + sphereFragmentShader}
+      ref={meshRef}
+    >
+      <directionalLight intensity={3} />
+
+      <octahedronGeometry args={[sphere.size, 6]} />
+      <shaderMaterial
+        vertexShader={sphereVertexShader}
+        fragmentShader={sphereFragmentShader}
+        transparent={true}
+      />
+    </mesh>
+  );
+}

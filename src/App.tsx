@@ -1,8 +1,9 @@
+import Scene from "./canvas/Scene";
 
 export default function App() {
   return (
-    <div>
-      <p className="p-4">NIGGER</p>
+    <div className="w-screen h-screen bg-gray-950">
+      <Scene />
     </div>
   );
 };
