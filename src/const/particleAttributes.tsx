@@ -5,5 +5,5 @@ export const cube = {
 }
 
 export const sphere = {
-  size: 0.7
+  size: 0.6
 }
