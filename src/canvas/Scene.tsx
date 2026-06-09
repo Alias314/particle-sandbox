@@ -36,7 +36,7 @@ export default function Scene() {
 
       <EffectComposer>
         <Bloom
-          luminanceThreshold={2}
+          luminanceThreshold={0.5}
           mipmapBlur={true} 
         />
       </EffectComposer>
