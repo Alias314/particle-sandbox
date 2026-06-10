@@ -9,6 +9,7 @@ export const generateParticles = (amountCube, amountSphere) => {
     particles.cube.push({
       id: i,
       size: getRandomSize(cube.minSize, cube.maxSize),
+      speed: cube.speed,
       position: getRandomPosition(cube.initialPositionRange),
       rotation: getRandomRotation(360),
       direction: getRandomDirection(360).normalize()

@@ -12,8 +12,7 @@ import {
 export default function Cube({ id, particleAttributes }) {
   const meshRef = useRef();
   const newDirection = new Vector3();
-  const speed = cube.speed;
-
+  
   useFrame((_, delta) => {
     if (!meshRef.current) return;
 
@@ -46,7 +45,7 @@ export default function Cube({ id, particleAttributes }) {
     newDirection.add(cubeSphereCohesionDirection).multiplyScalar(1.5);
     newDirection.add(cubeSphereSeparationDirection);
 
-    meshRef.current.position.addScaledVector(newDirection, speed * delta);
+    meshRef.current.position.addScaledVector(newDirection, cube.speed * delta);
     particleAttributes.cube[id].position.copy(meshRef.current.position);
     particleAttributes.cube[id].direction.copy(newDirection);
 
