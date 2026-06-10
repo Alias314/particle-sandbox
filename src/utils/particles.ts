@@ -1,6 +1,6 @@
 import { Euler, Vector3 } from "three";
 import { cube } from "../const/particleAttributes";
-import { getRandomDirection, getRandomPosition, getRandomRotation } from "./math";
+import { getRandomDirection, getRandomPosition, getRandomRotation, getRandomSize } from "./math";
 
 export const generateParticles = (amountCube, amountSphere) => {
   const particles = {cube: [], sphere: []};
@@ -8,6 +8,7 @@ export const generateParticles = (amountCube, amountSphere) => {
   for (let i = 0; i < amountCube; i++) {
     particles.cube.push({
       id: i,
+      size: getRandomSize(cube.minSize, cube.maxSize),
       position: getRandomPosition(cube.initialPositionRange),
       rotation: getRandomRotation(360),
       direction: getRandomDirection(360).normalize()

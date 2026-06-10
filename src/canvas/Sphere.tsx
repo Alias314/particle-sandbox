@@ -26,7 +26,7 @@ export default function Sphere({ id, particleAttributes, backgroundRef }) {
       key={sphereVertexShader + sphereFragmentShader}
       ref={meshRef}
     >
-      <directionalLight intensity={3} />
+      <pointLight intensity={6} distance={10} decay={0.6} />
 
       <octahedronGeometry args={[sphere.size, 6]} />
       <shaderMaterial

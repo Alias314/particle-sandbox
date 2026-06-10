@@ -30,3 +30,7 @@ export const getRandomDirection = (range) => {
 
   return rotation;
 };
+
+export const getRandomSize = (minSize, maxSize) => {
+  return Math.random() * (maxSize - minSize) + minSize;
+}
