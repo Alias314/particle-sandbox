@@ -8,12 +8,12 @@ import { Bloom, EffectComposer } from "@react-three/postprocessing";
 import Background from "./Background";
 
 export default function Scene() {
-  const particleAttributesRef = useRef(generateParticles(500, 1));
+  const particleAttributesRef = useRef(generateParticles(200, 1));
   const backgroundRef = useRef();
 
   return (
     <Canvas camera={{ position: [0, 0, 5] }}>
-      <ambientLight intensity={0.5} />
+      {/* <ambientLight intensity={0.5} /> */}
 
       {particleAttributesRef.current.cube.map((particle) => (
         <Cube

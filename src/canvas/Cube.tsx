@@ -7,13 +7,13 @@ import { getAlignmentDirection, getCubeSphereCohesionDirection, getCubeSPhereSep
 export default function Cube({ id, particleAttributes }) {
   const meshRef = useRef();
   const newDirection = new Vector3();
-  const speed = 3;
+  const speed = cube.speed;
 
   useFrame((_, delta) => {
     if (!meshRef.current) return;
-    meshRef.current.rotation.x += delta * speed;
-    meshRef.current.rotation.y += delta * speed;
-    particleAttributes.cube[id].rotation.copy(meshRef.current.rotation);
+    // meshRef.current.rotation.x += delta * speed;
+    // meshRef.current.rotation.y += delta * speed;
+    // particleAttributes.cube[id].rotation.copy(meshRef.current.rotation);
 
     const alignmentDirection = getAlignmentDirection(10, id, particleAttributes.cube);
     const separationDirection = getSeparationDirection(0.1, id, particleAttributes.cube);

@@ -1,6 +1,7 @@
 
 export const cube = {
-  size: 0.01,
+  size: 0.15,
+  speed: 1,
   initialPositionRange: 4
 }
 
