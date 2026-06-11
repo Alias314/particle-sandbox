@@ -1,18 +1,25 @@
 import { Euler, Vector3 } from "three";
 import { cube } from "../const/particleAttributes";
-import { getRandomDirection, getRandomPosition, getRandomRotation, getRandomSize } from "./math";
+import {
+  getRandomDirection,
+  getRandomPosition,
+  getRandomRotation,
+  getRandomSize,
+} from "./math";
+import { generation } from "@/const/particleGeneration";
 
-export const generateParticles = (amountCube, amountSphere) => {
-  const particles = {cube: [], sphere: []};
+export const generateParticlePool = (amountCube, amountSphere) => {
+  const particles = { cube: [], sphere: [] };
 
   for (let i = 0; i < amountCube; i++) {
     particles.cube.push({
       id: i,
-      size: getRandomSize(cube.minSize, cube.maxSize),
+      size: 0,
       speed: cube.speed,
-      position: getRandomPosition(cube.initialPositionRange),
+      position: new Vector3(10000, 0, 0),
       rotation: getRandomRotation(360),
-      direction: getRandomDirection(360).normalize()
+      direction: getRandomDirection(360).normalize(),
+      isVisible: false
     });
   }
 
@@ -21,9 +28,22 @@ export const generateParticles = (amountCube, amountSphere) => {
       id: i,
       position: new Vector3(0, 0, 0),
       rotation: new Euler(0, 0, 0),
-      direction: getRandomDirection(360).normalize()
+      direction: getRandomDirection(360).normalize(),
     });
   }
 
   return particles;
+};
+
+export const generateParticles = (particleAttributes) => {
+  for (let i = 0; i < particleAttributes.cube.length; i++) {
+    if (i < generation.amountCube) {
+      particleAttributes.cube[i].size = getRandomSize(cube.minSize, cube.maxSize);
+      particleAttributes.cube[i].position = getRandomPosition(cube.initialPositionRange);
+      particleAttributes.cube[i].isVisible = true;
+    } else {
+      particleAttributes.cube[i].position = new Vector3(10000, 0, 0);
+      particleAttributes.cube[i].isVisible = false;
+    }
+  }
 };

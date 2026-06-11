@@ -1,5 +1,4 @@
 import { cube } from "@/const/particleAttributes";
-import { Label } from "./ui/label";
 import {
   Sidebar,
   SidebarContent,
@@ -10,11 +9,16 @@ import {
   SidebarMenuItem,
   SidebarProvider,
 } from "./ui/sidebar";
-import { Slider } from "./ui/slider";
 import { useState } from "react";
+import SettingSlider from "./SettingSlider";
+import { Button } from "./ui/button";
+import { generateParticles } from "@/utils/particles";
+import { generation } from "@/const/particleGeneration";
 
-export default function AppSidebar() {
+export default function AppSidebar({ particleAttributes }) {
+  const [amountParticles, setAmountParticles] = useState(generation.amountCube);
   const [cubeSpeed, setCubeSpeed] = useState(cube.speed);
+  const [cubeSize, setCubeSize] = useState([cube.minSize, cube.maxSize]);
 
   return (
     <Sidebar
@@ -22,30 +26,71 @@ export default function AppSidebar() {
       side="right"
     >
       <SidebarContent>
-        <SidebarGroup>
-          <SidebarGroupLabel>
+        <SidebarGroup className="p-3 pt-4">
+          <SidebarGroupLabel className="mb-8">
             <h1 className="text-2xl text-gray-100">Sandbox Settings</h1>
           </SidebarGroupLabel>
 
           <SidebarGroupContent>
-            <SidebarMenu>
+            <SidebarMenu className="gap-4">
               <SidebarMenuItem>
-                <div className="gap-4">
-                  <div className="mb-2 flex justify-between">
-                    <Label className="text-xl text-gray-100">Speed</Label>
-                    <Label className="text-xl text-gray-100">{cubeSpeed}</Label>
-                  </div>
+                <SettingSlider
+                  label={"Amount"}
+                  defaultValue={amountParticles}
+                  min={0}
+                  max={1000}
+                  step={1}
+                  setValueLabel={setAmountParticles}
+                  onUpdate={(newValue) => {
+                    generation.amountCube = newValue[0];
+                    console.log(generation.amountCube);
+                  }}
+                  tooltip={"Modifies the amount of particles. Generate particles for changes to apply."}
+                />
+              </SidebarMenuItem>
+              
+              <SidebarMenuItem>
+                <SettingSlider
+                  label={"Speed"}
+                  defaultValue={cubeSpeed}
+                  min={0}
+                  max={20}
+                  step={0.1}
+                  setValueLabel={setCubeSpeed}
+                  onUpdate={(newValue) => {
+                    cube.speed = newValue[0];
+                  }}
+                  tooltip={"Multiplier for particle speed"}
+                />
+              </SidebarMenuItem>
 
-                  <Slider 
-                    defaultValue={[cubeSpeed]}
-                    max={20}
-                    step={0.2}
-                    onValueChange={(value) => {
-                      setCubeSpeed(value);
-                      cube.speed = value;
-                    }}
-                  />
-                </div>
+              <SidebarMenuItem>
+                <SettingSlider
+                  label={"Size"}
+                  defaultValue={cubeSize}
+                  min={0.05}
+                  max={1}
+                  step={0.01}
+                  setValueLabel={setCubeSize}
+                  onUpdate={(newValue) => {
+                    cube.minSize = newValue[0];
+                    cube.maxSize = newValue[1];
+                    console.log(cube.minSize, cube.maxSize);
+                  }}
+                  tooltip={
+                    "Modifies the minimum and maximum size of a particle. Particles will have sizes in the range of the minimum and maximum sizes. Generate particles for changes to apply."
+                  }
+                />
+              </SidebarMenuItem>
+
+              <SidebarMenuItem className="mt-4">
+                <Button
+                  className="bg-gray-100 text-xl text-gray-950 rounded-md"
+                  variant="secondary"
+                  onClick={() => generateParticles(particleAttributes)}
+                >
+                  Generate Particles
+                </Button>
               </SidebarMenuItem>
             </SidebarMenu>
           </SidebarGroupContent>

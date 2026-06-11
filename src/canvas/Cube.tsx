@@ -12,9 +12,13 @@ import {
 export default function Cube({ id, particleAttributes }) {
   const meshRef = useRef();
   const newDirection = new Vector3();
-  
+
   useFrame((_, delta) => {
-    if (!meshRef.current) return;
+    meshRef.current.visible = particleAttributes.cube[id].isVisible;
+    if (!meshRef.current || !particleAttributes.cube[id].isVisible) return;
+
+    const size = particleAttributes.cube[id].size;
+    meshRef.current.scale.set(size, size, size);
 
     const alignmentDirection = getAlignmentDirection(
       5,
@@ -45,8 +49,8 @@ export default function Cube({ id, particleAttributes }) {
     newDirection.add(cubeSphereCohesionDirection).multiplyScalar(1.5);
     newDirection.add(cubeSphereSeparationDirection);
 
-    meshRef.current.position.addScaledVector(newDirection, cube.speed * delta);
-    particleAttributes.cube[id].position.copy(meshRef.current.position);
+    particleAttributes.cube[id].position.addScaledVector(newDirection, cube.speed * delta);
+    meshRef.current.position.copy(particleAttributes.cube[id].position);
     particleAttributes.cube[id].direction.copy(newDirection);
 
     const targetPosition = meshRef.current.position.clone().add(newDirection);
@@ -58,6 +62,7 @@ export default function Cube({ id, particleAttributes }) {
       ref={meshRef}
       position={particleAttributes.cube[id].position}
       rotation={particleAttributes.cube[id].rotation}
+      visible={particleAttributes.cube[id].isVisible}
     >
       <boxGeometry
         args={[

@@ -1,11 +1,13 @@
-import Scene from "./canvas/Scene";
 import Dashboard from "./components/Dashboard";
 import { SidebarProvider } from "./components/ui/sidebar";
+import { TooltipProvider } from "./components/ui/tooltip";
 
 export default function App() {
   return (
-    <SidebarProvider>
-      <Dashboard />
-    </SidebarProvider>
+    <TooltipProvider>
+      <SidebarProvider>
+        <Dashboard />
+      </SidebarProvider>
+    </TooltipProvider>
   );
 }
