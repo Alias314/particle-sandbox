@@ -3,9 +3,9 @@ import { degToRad } from "three/src/math/MathUtils.js";
 
 export const getRandomPosition = (range) => {
   const position = new Vector3(
-    Math.random() * range - range / 2,
-    Math.random() * range - range / 2,
-    Math.random() * range - range / 2,
+    getRandomNumFromRange(-range, range),
+    getRandomNumFromRange(-range, range),
+    getRandomNumFromRange(-range, range),
   );
 
   return position;
@@ -31,6 +31,6 @@ export const getRandomDirection = (range) => {
   return rotation;
 };
 
-export const getRandomSize = (minSize, maxSize) => {
-  return Math.random() * (maxSize - minSize) + minSize;
+export const getRandomNumFromRange = (min, max) => {
+  return Math.random() * (max - min) + min;
 }

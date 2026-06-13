@@ -4,7 +4,7 @@ import {
   getRandomDirection,
   getRandomPosition,
   getRandomRotation,
-  getRandomSize,
+  getRandomNumFromRange,
 } from "./math";
 import { generation } from "@/const/particleGeneration";
 
@@ -38,8 +38,8 @@ export const generateParticlePool = (amountCube, amountSphere) => {
 export const generateParticles = (particleAttributes) => {
   for (let i = 0; i < particleAttributes.cube.length; i++) {
     if (i < generation.amountCube) {
-      particleAttributes.cube[i].size = getRandomSize(cube.minSize, cube.maxSize);
-      particleAttributes.cube[i].position = getRandomPosition(cube.initialPositionRange);
+      particleAttributes.cube[i].size = getRandomNumFromRange(cube.minSize, cube.maxSize);
+      particleAttributes.cube[i].position = getRandomPosition(cube.spawnPositionRange);
       particleAttributes.cube[i].isVisible = true;
     } else {
       particleAttributes.cube[i].position = new Vector3(10000, 0, 0);
