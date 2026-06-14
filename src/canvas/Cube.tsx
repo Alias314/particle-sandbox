@@ -1,5 +1,5 @@
 import { useFrame } from "@react-three/fiber";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { BoxGeometry, MeshStandardMaterial, Vector3 } from "three";
 import { boids, cube } from "../const/particleAttributes";
 import {
@@ -9,17 +9,17 @@ import {
   getSeparationDirection,
 } from "../utils/boids";
 
-export default function Cube({ id, particleAttributes }) {
+export default function Cube({ id, particleAttributes, particleShape }) {
   const meshRef = useRef();
   const newDirection = new Vector3();
-  
+
   useFrame((_, delta) => {
     meshRef.current.visible = particleAttributes.cube[id].isVisible;
     if (!meshRef.current || !particleAttributes.cube[id].isVisible) return;
-    
+
     const size = particleAttributes.cube[id].size;
     meshRef.current.scale.set(size, size, size);
-    
+
     const alignmentDirection = getAlignmentDirection(
       boids.particleAlignmentRadius,
       id,
@@ -42,16 +42,25 @@ export default function Cube({ id, particleAttributes }) {
       particleAttributes.cube,
       particleAttributes.sphere,
     );
-    
+
     newDirection.copy(particleAttributes.cube[id].direction);
     newDirection.sub(alignmentDirection);
     newDirection.add(separationDirection).normalize();
-    newDirection.addScaledVector(cubeSphereCohesionDirection, boids.sphereCohesionStrength);
-    newDirection.addScaledVector(cubeSphereSeparationDirection, boids.sphereSeparationStrength);
+    newDirection.addScaledVector(
+      cubeSphereCohesionDirection,
+      boids.sphereCohesionStrength,
+    );
+    newDirection.addScaledVector(
+      cubeSphereSeparationDirection,
+      boids.sphereSeparationStrength,
+    );
 
     const speed = cube.speed;
-    
-    particleAttributes.cube[id].position.addScaledVector(newDirection, speed * delta);
+
+    particleAttributes.cube[id].position.addScaledVector(
+      newDirection,
+      speed * delta,
+    );
     meshRef.current.position.copy(particleAttributes.cube[id].position);
     particleAttributes.cube[id].direction.copy(newDirection);
 
@@ -66,14 +75,67 @@ export default function Cube({ id, particleAttributes }) {
       rotation={particleAttributes.cube[id].rotation}
       visible={particleAttributes.cube[id].isVisible}
     >
-      <boxGeometry
-        args={[
-          particleAttributes.cube[id].size,
-          particleAttributes.cube[id].size,
-          particleAttributes.cube[id].size,
-        ]}
-      />
-      <meshStandardMaterial />
+      {particleShape === "cube" && (
+        <mesh>
+          <boxGeometry
+            args={[
+              particleAttributes.cube[id].size,
+              particleAttributes.cube[id].size,
+              particleAttributes.cube[id].size,
+            ]}
+          />
+          <meshStandardMaterial />
+        </mesh>
+      )}
+
+      {particleShape === "cone" && (
+        <mesh rotation={[Math.PI / 2, 0, 0]}>
+          <coneGeometry args={[0.1, 0.5]} />
+          <meshStandardMaterial />
+        </mesh>
+      )}
+
+      {particleShape === "dodecahedron" && (
+        <mesh rotation={[Math.PI / 2, 0, 0]}>
+          <dodecahedronGeometry args={[particleAttributes.cube[id].size, 0]} />
+          <meshStandardMaterial />
+        </mesh>
+      )}
+
+      {particleShape === "dodecahedron" && (
+        <mesh rotation={[Math.PI / 2, 0, 0]}>
+          <dodecahedronGeometry args={[particleAttributes.cube[id].size, 0]} />
+          <meshStandardMaterial />
+        </mesh>
+      )}
+
+      {particleShape === "circle" && (
+        <mesh>
+          <circleGeometry args={[particleAttributes.cube[id].size]} />
+          <meshStandardMaterial />
+        </mesh>
+      )}
+
+      {particleShape === "octahedron" && (
+        <mesh>
+          <octahedronGeometry args={[particleAttributes.cube[id].size]} />
+          <meshStandardMaterial />
+        </mesh>
+      )}
+
+      {particleShape === "torus" && (
+        <mesh>
+          <torusGeometry args={[particleAttributes.cube[id].size, 0.1]} />
+          <meshStandardMaterial />
+        </mesh>
+      )}
+
+      {particleShape === "circle" && (
+        <mesh>
+          <circleGeometry args={[particleAttributes.cube[id].size]} />
+          <meshStandardMaterial />
+        </mesh>
+      )}
     </mesh>
   );
 }

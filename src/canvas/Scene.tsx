@@ -1,12 +1,13 @@
 import { Canvas } from "@react-three/fiber";
 import Cube from "./Cube";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { generateParticles } from "../utils/particles";
 import Sphere from "./Sphere";
 import { Bloom, EffectComposer } from "@react-three/postprocessing";
 import Background from "./Background";
+import { cube } from "@/const/particleAttributes";
 
-export default function Scene({ particleAttributes }) {
+export default function Scene({ particleAttributes, particleShape }) {
   const backgroundRef = useRef();
 
   useEffect(() => {
@@ -20,6 +21,7 @@ export default function Scene({ particleAttributes }) {
           key={particle.id}
           id={particle.id}
           particleAttributes={particleAttributes}
+          particleShape={particleShape}
         />
       ))}
 

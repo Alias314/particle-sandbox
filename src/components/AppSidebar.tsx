@@ -1,4 +1,4 @@
-import { boids, cube } from "@/const/particleAttributes";
+import { boids, cube, particleShapes } from "@/const/particleAttributes";
 import {
   Sidebar,
   SidebarContent,
@@ -6,7 +6,9 @@ import {
   SidebarGroupContent,
   SidebarGroupLabel,
   SidebarMenu,
+  SidebarMenuButton,
   SidebarMenuItem,
+  SidebarMenuSub,
   SidebarProvider,
 } from "./ui/sidebar";
 import { useState } from "react";
@@ -15,8 +17,16 @@ import { Button } from "./ui/button";
 import { generateParticles } from "@/utils/particles";
 import { generation } from "@/const/particleGeneration";
 import { Separator } from "./ui/separator";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "./ui/collapsible";
+import { ChevronDown, ChevronRight } from "lucide-react";
+import { Label } from "./ui/label";
+import { titleCase } from "@/utils/string";
 
-export default function AppSidebar({ particleAttributes }) {
+export default function AppSidebar({ particleAttributes, particleShape, setParticleShape }) {
   const [amountParticles, setAmountParticles] = useState(generation.amountCube);
   const [cubeSpeed, setCubeSpeed] = useState(cube.speed);
   const [cubeSize, setCubeSize] = useState([cube.minSize, cube.maxSize]);
@@ -47,6 +57,7 @@ export default function AppSidebar({ particleAttributes }) {
   const [sphereSeparationStrength, setSphereSeparationStrength] = useState(
     boids.sphereSeparationStrength,
   );
+  const [isCollapsibleOpen, setIsCollapsibleOpen] = useState(false);
 
   return (
     <Sidebar
@@ -62,12 +73,37 @@ export default function AppSidebar({ particleAttributes }) {
           <Separator className="mx-2 mt-1 mb-8" />
 
           <SidebarGroupContent>
-            {/* <SidebarGroupLabel className="justify-center">
-              <h1 className="mb-2 text-xl text-gray-100">
-                Particle Parameters
-              </h1>
-            </SidebarGroupLabel> */}
             <SidebarMenu className="gap-4">
+              <SidebarMenuItem>
+                <Label className="text-xl text-gray-100">Particle Shape</Label>
+                <Collapsible open={isCollapsibleOpen} onOpenChange={setIsCollapsibleOpen}>
+                  <CollapsibleTrigger
+                    className="hover:bg-slate-900 active:bg-slate-900 focus:bg-slate-900 data-[state=open]:bg-slate-900 data-[state=open]:hover:bg-slate-900"
+                    asChild
+                  >
+                    <SidebarMenuButton>
+                      <Label className="text-xl text-gray-100">
+                        {titleCase(particleShape)}
+                      </Label>
+                      <ChevronDown className="text-gray-100 text-4xl ml-auto" />
+                    </SidebarMenuButton>
+                  </CollapsibleTrigger>
+                  <CollapsibleContent className="bg-slate-900">
+                    {particleShapes.map((shape) => (
+                      <Button
+                        className="w-full pl-2 justify-start bg-slate-900 text-xl text-gray-100 rounded-none"
+                        onClick={() => {
+                          setParticleShape(shape);
+                          setIsCollapsibleOpen(false);
+                        }}
+                      >
+                        {titleCase(shape)}
+                      </Button>
+                    ))}
+                  </CollapsibleContent>
+                </Collapsible>
+              </SidebarMenuItem>
+
               <SidebarMenuItem>
                 <SettingSlider
                   label={"Amount"}
@@ -139,7 +175,9 @@ export default function AppSidebar({ particleAttributes }) {
                   max={20}
                   step={1}
                   setValueLabel={setParticleAlignmentRadius}
-                  onUpdate={(newValue) => (boids.particleAlignmentRadius = newValue[0])}
+                  onUpdate={(newValue) =>
+                    (boids.particleAlignmentRadius = newValue[0])
+                  }
                   tooltip={
                     "The range of which a particle is positioned on generation from the origin. A range of 10 means that a particle will spawn anywhere within 10 units from the origin."
                   }
@@ -154,7 +192,9 @@ export default function AppSidebar({ particleAttributes }) {
                   max={10}
                   step={0.1}
                   setValueLabel={setParticleAlignmentStrength}
-                  onUpdate={(newValue) => (boids.particleAlignmentStrength = newValue[0])}
+                  onUpdate={(newValue) =>
+                    (boids.particleAlignmentStrength = newValue[0])
+                  }
                   tooltip={
                     "The range of which a particle is positioned on generation from the origin. A range of 10 means that a particle will spawn anywhere within 10 units from the origin."
                   }
@@ -169,7 +209,9 @@ export default function AppSidebar({ particleAttributes }) {
                   max={20}
                   step={0.1}
                   setValueLabel={setParticleSeparationRadius}
-                  onUpdate={(newValue) => (boids.particleSeparationRadius = newValue[0])}
+                  onUpdate={(newValue) =>
+                    (boids.particleSeparationRadius = newValue[0])
+                  }
                   tooltip={
                     "The range of which a particle is positioned on generation from the origin. A range of 10 means that a particle will spawn anywhere within 10 units from the origin."
                   }
@@ -184,7 +226,9 @@ export default function AppSidebar({ particleAttributes }) {
                   max={10}
                   step={0.1}
                   setValueLabel={setParticleSeparationStrength}
-                  onUpdate={(newValue) => (boids.particleSeparationStrength = newValue[0])}
+                  onUpdate={(newValue) =>
+                    (boids.particleSeparationStrength = newValue[0])
+                  }
                   tooltip={
                     "The range of which a particle is positioned on generation from the origin. A range of 10 means that a particle will spawn anywhere within 10 units from the origin."
                   }

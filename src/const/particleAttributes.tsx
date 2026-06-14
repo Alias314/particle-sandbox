@@ -1,4 +1,5 @@
 export const cube = {
+  shape: "cube",
   minSize: 0.15,
   maxSize: 0.38,
   speed: 1,
@@ -20,3 +21,5 @@ export const boids = {
   sphereSeparationRadius: 10,
   sphereSeparationStrength: 1,
 };
+
+export const particleShapes = ["cube", "cone", "dodecahedron", "octahedron", "torus", "circle"];
