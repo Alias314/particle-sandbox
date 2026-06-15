@@ -4,6 +4,7 @@ import { BoxGeometry, MeshStandardMaterial, Vector3 } from "three";
 import { boids, cube } from "../const/particleAttributes";
 import {
   getAlignmentDirection,
+  getCohesionDirection,
   getCubeSphereCohesionDirection,
   getCubeSPhereSeparationDirection,
   getSeparationDirection,
@@ -22,6 +23,11 @@ export default function Cube({ id, particleAttributes, particleShape }) {
 
     const alignmentDirection = getAlignmentDirection(
       boids.particleAlignmentRadius,
+      id,
+      particleAttributes.cube,
+    );
+    const cohesionDirection = getCohesionDirection(
+      boids.particleCohesionRadius,
       id,
       particleAttributes.cube,
     );
@@ -44,8 +50,17 @@ export default function Cube({ id, particleAttributes, particleShape }) {
     );
 
     newDirection.copy(particleAttributes.cube[id].direction);
-    newDirection.sub(alignmentDirection);
-    newDirection.add(separationDirection).normalize();
+    newDirection
+      .sub(alignmentDirection)
+      .multiplyScalar(boids.particleAlignmentStrength);
+    newDirection.addScaledVector(
+      cohesionDirection,
+      boids.particleCohesionStrength,
+    );
+    newDirection.addScaledVector(
+      separationDirection,
+      boids.particleSeparationStrength,
+    ).normalize();
     newDirection.addScaledVector(
       cubeSphereCohesionDirection,
       boids.sphereCohesionStrength,
@@ -64,8 +79,17 @@ export default function Cube({ id, particleAttributes, particleShape }) {
     meshRef.current.position.copy(particleAttributes.cube[id].position);
     particleAttributes.cube[id].direction.copy(newDirection);
 
-    const targetPosition = meshRef.current.position.clone().add(newDirection);
-    meshRef.current.lookAt(targetPosition);
+    if (cube.rotation === "follow direction") {
+      const targetPosition = meshRef.current.position.clone().add(newDirection);
+      meshRef.current.lookAt(targetPosition);
+    } else if (cube.rotation === "follow sphere") {
+      const targetPosition = particleAttributes.sphere[0].position;
+      meshRef.current.lookAt(targetPosition);
+    } else if (cube.rotation === "rotate naturally") {
+      meshRef.current.rotation.x += delta;
+      meshRef.current.rotation.y += delta;
+      meshRef.current.rotation.z += delta;
+    }
   });
 
   return (

@@ -5,7 +5,6 @@ import { generateParticles } from "../utils/particles";
 import Sphere from "./Sphere";
 import { Bloom, EffectComposer } from "@react-three/postprocessing";
 import Background from "./Background";
-import { cube } from "@/const/particleAttributes";
 
 export default function Scene({ particleAttributes, particleShape }) {
   const backgroundRef = useRef();
@@ -16,6 +15,8 @@ export default function Scene({ particleAttributes, particleShape }) {
 
   return (
     <Canvas camera={{ position: [0, 0, 5] }}>
+      {/* <gridHelper args={[100, 75]} position={[0, -1.5, 0]} /> */}
+
       {particleAttributes.cube.map((particle) => (
         <Cube
           key={particle.id}
