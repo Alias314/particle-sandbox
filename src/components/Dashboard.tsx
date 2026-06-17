@@ -6,6 +6,7 @@ import { generateParticlePool } from "@/utils/particles";
 import { pool } from "@/const/particleGeneration";
 import { cube, defaultSceneSettings } from "@/const/particleAttributes";
 import ToolBar from "./ToolBar";
+import SplashCard from "./SplashCard";
 
 export default function Dashboard() {
   const particleAttributesRef = useRef(
@@ -13,6 +14,7 @@ export default function Dashboard() {
   );
   const [particleShape, setParticleShape] = useState(cube.shape);
   const [sceneSettings, setSceneSettings] = useState(defaultSceneSettings);
+  const [showSplashCard, setShowSplashCard] = useState(true);
 
   return (
     <SidebarProvider>
@@ -30,6 +32,10 @@ export default function Dashboard() {
         setParticleShape={setParticleShape}
         setSceneSettings={setSceneSettings}
       />
+
+      {showSplashCard && (
+        <SplashCard onClose={() => setShowSplashCard(false)} />
+      )}
     </SidebarProvider>
   );
 }
