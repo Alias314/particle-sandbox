@@ -5,8 +5,14 @@ import { generateParticles } from "../utils/particles";
 import Sphere from "./Sphere";
 import { Bloom, EffectComposer } from "@react-three/postprocessing";
 import Background from "./Background";
+import { Sparkles, Stars } from "@react-three/drei";
+import SceneSettings from "./SceneSettings";
 
-export default function Scene({ particleAttributes, particleShape }) {
+export default function Scene({
+  particleAttributes,
+  sceneSettings,
+  particleShape,
+}) {
   const backgroundRef = useRef();
 
   useEffect(() => {
@@ -15,8 +21,6 @@ export default function Scene({ particleAttributes, particleShape }) {
 
   return (
     <Canvas camera={{ position: [0, 0, 5] }}>
-      {/* <gridHelper args={[100, 75]} position={[0, -1.5, 0]} /> */}
-
       {particleAttributes.cube.map((particle) => (
         <Cube
           key={particle.id}
@@ -32,14 +36,17 @@ export default function Scene({ particleAttributes, particleShape }) {
           id={particle.id}
           particleAttributes={particleAttributes}
           backgroundRef={backgroundRef}
+          sceneSettings={sceneSettings}
         />
       ))}
 
       <Background backgroundRef={backgroundRef} />
 
-      <EffectComposer>
+      <SceneSettings sceneSettings={sceneSettings} />
+
+      {/* <EffectComposer>
         <Bloom luminanceThreshold={0.5} mipmapBlur={true} />
-      </EffectComposer>
+      </EffectComposer> */}
     </Canvas>
   );
 }

@@ -6,7 +6,12 @@ import { Raycaster } from "three";
 import { sphere } from "../const/particleAttributes";
 import { Sparkles } from "@react-three/drei";
 
-export default function Sphere({ id, particleAttributes, backgroundRef }) {
+export default function Sphere({
+  id,
+  particleAttributes,
+  backgroundRef,
+  sceneSettings,
+}) {
   const meshRef = useRef();
   const { pointer, camera } = useThree();
   const raycaster = new Raycaster();
@@ -26,30 +31,43 @@ export default function Sphere({ id, particleAttributes, backgroundRef }) {
       particleAttributes.sphere[id].position.copy(meshRef.current.position);
     } else if (sphere.movement === "circle") {
       time.current += delta;
-      meshRef.current.position.x = Math.cos(time.current * sphere.speed) * sphere.radius;
-      meshRef.current.position.y = Math.sin(time.current * sphere.speed) * sphere.radius;
+      meshRef.current.position.x =
+        Math.cos(time.current * sphere.speed) * sphere.radius;
+      meshRef.current.position.y =
+        Math.sin(time.current * sphere.speed) * sphere.radius;
       particleAttributes.sphere[id].position.copy(meshRef.current.position);
     } else if (sphere.movement === "figure 8") {
       time.current += delta;
-      meshRef.current.position.x = Math.sin(time.current * sphere.speed) * Math.cos(time.current * sphere.speed) * sphere.radius;
-      meshRef.current.position.y = Math.sin(time.current * sphere.speed) * sphere.radius;
+      meshRef.current.position.x =
+        Math.sin(time.current * sphere.speed) *
+        Math.cos(time.current * sphere.speed) *
+        sphere.radius;
+      meshRef.current.position.y =
+        Math.sin(time.current * sphere.speed) * sphere.radius;
       particleAttributes.sphere[id].position.copy(meshRef.current.position);
     } else if (sphere.movement === "figure 8 (horizontal)") {
       time.current += delta;
-      meshRef.current.position.x = Math.cos(time.current * sphere.speed) * sphere.radius;
-      meshRef.current.position.y = Math.sin(time.current * sphere.speed) * Math.cos(time.current * sphere.speed) * sphere.radius;
+      meshRef.current.position.x =
+        Math.cos(time.current * sphere.speed) * sphere.radius;
+      meshRef.current.position.y =
+        Math.sin(time.current * sphere.speed) *
+        Math.cos(time.current * sphere.speed) *
+        sphere.radius;
       particleAttributes.sphere[id].position.copy(meshRef.current.position);
     } else if (sphere.movement === "none") {
-      meshRef.current.position.x = 0
-      meshRef.current.position.y = 0
+      meshRef.current.position.x = 0;
+      meshRef.current.position.y = 0;
+      particleAttributes.sphere[id].position.copy(meshRef.current.position);
     }
   });
 
   return (
     <mesh key={sphereVertexShader + sphereFragmentShader} ref={meshRef}>
-      <pointLight intensity={6} distance={10} decay={0.6} />
+      {sceneSettings.enablePointLight && (
+        <pointLight intensity={sceneSettings.pointLightIntensity} distance={10} decay={0.6} />
+      )}
 
-      <octahedronGeometry args={[1, 6]} />
+      <octahedronGeometry args={[1, 10]} />
       <shaderMaterial
         vertexShader={sphereVertexShader}
         fragmentShader={sphereFragmentShader}

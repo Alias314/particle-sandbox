@@ -28,7 +28,7 @@ export default function Dropdown({
         </TooltipContent>
       </Tooltip>
       <SelectTrigger className="w-full text-gray-100 text-xl bg-slate-800 rounded-sm data-placeholder:text-gray-100 focus-visible:ring-0">
-        <SelectValue placeholder={titleCase(placeholder)} />
+        <SelectValue placeholder={titleCase(placeholder.toString())} />
       </SelectTrigger>
       <SelectContent
         className="text-xl text-gray-100 bg-slate-800 rounded-sm"
@@ -43,7 +43,7 @@ export default function Dropdown({
               value={item}
               onClick={() => onClick(item)}
             >
-              {titleCase(item)}
+              {titleCase(item.toString())}
             </SelectItem>
           ))}
         </SelectGroup>

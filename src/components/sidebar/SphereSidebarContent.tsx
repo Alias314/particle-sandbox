@@ -46,7 +46,7 @@ export default function ParticleSidebarContent() {
           label={"Size"}
           defaultValue={sphereSize}
           min={0.1}
-          max={1}
+          max={2}
           step={0.01}
           setValueLabel={setSphereSize}
           onUpdate={(newValue) => (sphere.size = newValue[0])}

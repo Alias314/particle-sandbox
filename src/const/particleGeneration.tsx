@@ -4,6 +4,6 @@ export const pool = {
 };
 
 export const generation = {
-  amountCube: 200,
+  amountCube: 300,
   amountSphere: 1,
 };

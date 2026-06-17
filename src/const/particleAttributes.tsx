@@ -5,13 +5,13 @@ export const cube = {
   maxSize: 0.38,
   speed: 1,
   spawnPositionRange: 5,
-  timeToLive: 4,
 };
 
 export const sphere = {
   size: 0.65,
   speed: 1,
   radius: 1,
+  // movement: "follow cursor",
   movement: "none",
 };
 
@@ -28,6 +28,16 @@ export const boids = {
   sphereSeparationStrength: 1,
 };
 
+export const defaultSceneSettings = {
+  displayStars: false,
+  displayGrid: false,
+  displayBloom: true,
+  enablePointLight: true,
+  pointLightIntensity: 6,
+  enableAmbientLight: false,
+  ambientLightIntensity: 2
+}
+
 export const particleShapes = [
   "cube",
   "cone",
@@ -35,6 +45,7 @@ export const particleShapes = [
   "octahedron",
   "torus",
   "circle",
+  "point"
 ];
 
 export const particleRotations = [
@@ -49,5 +60,5 @@ export const sphereMovements = [
   "circle",
   "figure 8",
   "figure 8 (horizontal)",
-  "none"
+  "none",
 ];

@@ -4,88 +4,119 @@ import {
   particleRotations,
   boids,
   sphere,
+  defaultSceneSettings,
 } from "@/const/particleAttributes";
 import { generation } from "@/const/particleGeneration";
 import Dropdown from "../Dropdown";
 import SettingSlider from "../SettingSlider";
 import { SidebarMenu, SidebarMenuItem } from "../ui/sidebar";
 import { useState } from "react";
+import { Toggle } from "../ui/toggle";
+import SceneSettings from "@/canvas/SceneSettings";
 
-export default function ParticleSidebarContent() {
-  const [sphereCohesionRadius, setSphereCohesionRadius] = useState(
-    boids.sphereCohesionRadius,
+export default function ParticleSidebarContent({ setSceneSettings }) {
+  const [ambientLightIntensity, setAmbientLightIntensity] = useState(
+    defaultSceneSettings.ambientLightIntensity,
   );
-  const [sphereCohesionStrength, setSphereCohesionStrength] = useState(
-    boids.sphereCohesionStrength,
-  );
-  const [sphereSeparationRadius, setSphereSeparationRadius] = useState(
-    boids.sphereSeparationRadius,
-  );
-  const [sphereSeparationStrength, setSphereSeparationStrength] = useState(
-    boids.sphereSeparationStrength,
+  const [pointLightIntensity, setPointLightIntensity] = useState(
+    defaultSceneSettings.pointLightIntensity,
   );
 
   return (
     <SidebarMenu className="gap-4">
       <SidebarMenuItem>
+        <Dropdown
+          placeholder={defaultSceneSettings.displayStars}
+          list={[true, false]}
+          label={"Display Stars"}
+          tooltip={"Lorem ipsum"}
+          onClick={(value) =>
+            setSceneSettings((prev) => ({ ...prev, displayStars: value }))
+          }
+        />
+      </SidebarMenuItem>
+
+      <SidebarMenuItem>
+        <Dropdown
+          placeholder={defaultSceneSettings.displayGrid}
+          list={[true, false]}
+          label={"Display Grid"}
+          tooltip={"Lorem ipsum"}
+          onClick={(value) =>
+            setSceneSettings((prev) => ({ ...prev, displayGrid: value }))
+          }
+        />
+      </SidebarMenuItem>
+
+      <SidebarMenuItem>
+        <Dropdown
+          placeholder={defaultSceneSettings.displayBloom}
+          list={[true, false]}
+          label={"Enable Bloom"}
+          tooltip={"Lorem ipsum"}
+          onClick={(value) =>
+            setSceneSettings((prev) => ({ ...prev, displayBloom: value }))
+          }
+        />
+      </SidebarMenuItem>
+
+      <SidebarMenuItem>
+        <Dropdown
+          placeholder={defaultSceneSettings.enablePointLight}
+          list={[true, false]}
+          label={"Enable Point Light"}
+          tooltip={"Lorem ipsum"}
+          onClick={(value) =>
+            setSceneSettings((prev) => ({ ...prev, enablePointLight: value }))
+          }
+        />
+      </SidebarMenuItem>
+
+      <SidebarMenuItem>
+        <Dropdown
+          placeholder={defaultSceneSettings.enableAmbientLight}
+          list={[true, false]}
+          label={"Enable Ambient Light"}
+          tooltip={"Lorem ipsum"}
+          onClick={(value) =>
+            setSceneSettings((prev) => ({ ...prev, enableAmbientLight: value }))
+          }
+        />
+      </SidebarMenuItem>
+
+      <SidebarMenuItem>
         <SettingSlider
-          label={"SCENE TODO"}
-          defaultValue={sphereCohesionRadius}
+          label={"Point Light intensity"}
+          defaultValue={pointLightIntensity}
           min={0}
           max={20}
           step={0.1}
-          setValueLabel={setSphereCohesionRadius}
-          onUpdate={(newValue) => (boids.sphereCohesionRadius = newValue[0])}
-          tooltip={
-            "The range of which a particle is positioned on generation from the origin. A range of 10 means that a particle will spawn anywhere within 10 units from the origin."
+          setValueLabel={setPointLightIntensity}
+          onUpdate={(value) =>
+            setSceneSettings((prev) => ({
+              ...prev,
+              pointLightIntensity: value,
+            }))
           }
+          tooltip={"Lorem ipsum"}
         />
       </SidebarMenuItem>
 
       <SidebarMenuItem>
         <SettingSlider
-          label={"Sphere Cohesion Strength"}
-          defaultValue={sphereCohesionStrength}
+          label={"Ambient Light intensity"}
+          defaultValue={ambientLightIntensity}
           min={0}
-          max={10}
+          max={20}
           step={0.1}
-          setValueLabel={setSphereCohesionStrength}
-          onUpdate={(newValue) => (boids.sphereCohesionStrength = newValue[0])}
-          tooltip={
-            "The range of which a particle is positioned on generation from the origin. A range of 10 means that a particle will spawn anywhere within 10 units from the origin."
+          setValueLabel={setAmbientLightIntensity}
+          onUpdate={(value) =>
+            setSceneSettings((prev) => ({
+              ...prev,
+              ambientLightIntensity: value,
+            }))
           }
-        />
-      </SidebarMenuItem>
-
-      <SidebarMenuItem>
-        <SettingSlider
-          label={"Sphere Separation Radius"}
-          defaultValue={sphereSeparationRadius}
-          min={0}
-          max={10}
-          step={0.1}
-          setValueLabel={setSphereSeparationRadius}
-          onUpdate={(newValue) => (boids.sphereSeparationRadius = newValue[0])}
-          tooltip={
-            "The range of which a particle is positioned on generation from the origin. A range of 10 means that a particle will spawn anywhere within 10 units from the origin."
-          }
-        />
-      </SidebarMenuItem>
-
-      <SidebarMenuItem>
-        <SettingSlider
-          label={"Sphere Separation Strength"}
-          defaultValue={sphereSeparationStrength}
-          min={0}
-          max={10}
-          step={0.1}
-          setValueLabel={setSphereSeparationStrength}
-          onUpdate={(newValue) =>
-            (boids.sphereSeparationStrength = newValue[0])
-          }
-          tooltip={
-            "The range of which a particle is positioned on generation from the origin. A range of 10 means that a particle will spawn anywhere within 10 units from the origin."
-          }
+          tooltip={"Lorem ipsum"}
         />
       </SidebarMenuItem>
     </SidebarMenu>

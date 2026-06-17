@@ -48,6 +48,7 @@ export default function AppSidebar({
   particleAttributes,
   particleShape,
   setParticleShape,
+  setSceneSettings,
 }) {
   const [activeTab, setActiveTab] = useState("particles");
 
@@ -88,7 +89,9 @@ export default function AppSidebar({
               />
             )}
             {activeTab === "sphere" && <SphereSidebarContent />}
-            {activeTab === "scene" && <SceneSidebarContent />}
+            {activeTab === "scene" && (
+              <SceneSidebarContent setSceneSettings={setSceneSettings} />
+            )}
 
             <Separator className="my-6 mb-5" />
 

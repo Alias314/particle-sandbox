@@ -57,10 +57,9 @@ export default function Cube({ id, particleAttributes, particleShape }) {
       cohesionDirection,
       boids.particleCohesionStrength,
     );
-    newDirection.addScaledVector(
-      separationDirection,
-      boids.particleSeparationStrength,
-    ).normalize();
+    newDirection
+      .addScaledVector(separationDirection, boids.particleSeparationStrength)
+      .normalize();
     newDirection.addScaledVector(
       cubeSphereCohesionDirection,
       boids.sphereCohesionStrength,
@@ -89,6 +88,10 @@ export default function Cube({ id, particleAttributes, particleShape }) {
       meshRef.current.rotation.x += delta;
       meshRef.current.rotation.y += delta;
       meshRef.current.rotation.z += delta;
+    }
+
+    if (particleShape === "point") {
+      meshRef.current.rotation.set(0, 0, 0);
     }
   });
 
@@ -155,6 +158,13 @@ export default function Cube({ id, particleAttributes, particleShape }) {
       )}
 
       {particleShape === "circle" && (
+        <mesh>
+          <circleGeometry args={[particleAttributes.cube[id].size]} />
+          <meshStandardMaterial />
+        </mesh>
+      )}
+
+      {particleShape === "point" && (
         <mesh>
           <circleGeometry args={[particleAttributes.cube[id].size]} />
           <meshStandardMaterial />
