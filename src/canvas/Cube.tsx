@@ -18,8 +18,14 @@ export default function Cube({ id, particleAttributes, particleShape }) {
     meshRef.current.visible = particleAttributes.cube[id].isVisible;
     if (!meshRef.current || !particleAttributes.cube[id].isVisible) return;
 
-    const size = particleAttributes.cube[id].size;
-    meshRef.current.scale.set(size, size, size);
+    if (particleShape === "cone") {
+      const radius = particleAttributes.cube[id].radius;
+      const height = particleAttributes.cube[id].height;
+      meshRef.current.scale.set(radius, radius, height);
+    } else {
+      const size = particleAttributes.cube[id].size;
+      meshRef.current.scale.set(size, size, size);
+    }
 
     const alignmentDirection = getAlignmentDirection(
       boids.particleAlignmentRadius,
@@ -104,69 +110,49 @@ export default function Cube({ id, particleAttributes, particleShape }) {
     >
       {particleShape === "cube" && (
         <mesh>
-          <boxGeometry
-            args={[
-              particleAttributes.cube[id].size,
-              particleAttributes.cube[id].size,
-              particleAttributes.cube[id].size,
-            ]}
-          />
+          <boxGeometry />
           <meshStandardMaterial />
         </mesh>
       )}
 
       {particleShape === "cone" && (
         <mesh rotation={[Math.PI / 2, 0, 0]}>
-          <coneGeometry args={[0.1, 0.5]} />
+          <coneGeometry />
           <meshStandardMaterial />
         </mesh>
       )}
 
       {particleShape === "dodecahedron" && (
         <mesh rotation={[Math.PI / 2, 0, 0]}>
-          <dodecahedronGeometry args={[particleAttributes.cube[id].size, 0]} />
-          <meshStandardMaterial />
-        </mesh>
-      )}
-
-      {particleShape === "dodecahedron" && (
-        <mesh rotation={[Math.PI / 2, 0, 0]}>
-          <dodecahedronGeometry args={[particleAttributes.cube[id].size, 0]} />
-          <meshStandardMaterial />
-        </mesh>
-      )}
-
-      {particleShape === "circle" && (
-        <mesh>
-          <circleGeometry args={[particleAttributes.cube[id].size]} />
+          <dodecahedronGeometry />
           <meshStandardMaterial />
         </mesh>
       )}
 
       {particleShape === "octahedron" && (
         <mesh>
-          <octahedronGeometry args={[particleAttributes.cube[id].size]} />
+          <octahedronGeometry />
           <meshStandardMaterial />
         </mesh>
       )}
 
       {particleShape === "torus" && (
         <mesh>
-          <torusGeometry args={[particleAttributes.cube[id].size, 0.1]} />
+          <torusGeometry />
           <meshStandardMaterial />
         </mesh>
       )}
 
       {particleShape === "circle" && (
         <mesh>
-          <circleGeometry args={[particleAttributes.cube[id].size]} />
+          <circleGeometry />
           <meshStandardMaterial />
         </mesh>
       )}
 
       {particleShape === "point" && (
         <mesh>
-          <circleGeometry args={[particleAttributes.cube[id].size]} />
+          <circleGeometry />
           <meshStandardMaterial />
         </mesh>
       )}

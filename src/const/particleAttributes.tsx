@@ -1,8 +1,12 @@
 export const cube = {
-  shape: "cube",
+  shape: "dodecahedron",
   rotation: "follow direction",
-  minSize: 0.15,
-  maxSize: 0.38,
+  minRadius: 0.02,
+  maxRadius: 0.02,
+  minHeight: 0.25,
+  maxHeight: 0.25,
+  minSize: 0.02,
+  maxSize: 0.14,
   speed: 1,
   spawnPositionRange: 5,
 };
@@ -11,8 +15,7 @@ export const sphere = {
   size: 0.65,
   speed: 1,
   radius: 1,
-  // movement: "follow cursor",
-  movement: "none",
+  movement: "follow cursor",
 };
 
 export const boids = {

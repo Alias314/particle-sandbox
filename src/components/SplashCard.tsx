@@ -47,11 +47,11 @@ export default function SplashCard({ onClose }) {
             <CarouselNext className="right-3 [&_svg]:!w-6 [&_svg]:!h-6 bg-black/40 border-none text-white" />
           </Carousel>
         </CardHeader>
-        <CardContent>
-          <CardTitle className="text-xl text-center font-semibold">
+        <CardContent className="mt-1">
+          <CardTitle className="mb-1 text-xl text-center font-semibold">
             Particle Sandbox
           </CardTitle>
-          <CardDescription className="text-lg text-justify text-gray-900">
+          <CardDescription className="px-2 text-justify text-gray-900">
             Ni hao, this a real-time 3D particle simulation and stuff yea. hmm
             this uses the BOIDS algorithm for the particle movement and stuff.
             there a buncha sliders that you can use to tweak the amount of

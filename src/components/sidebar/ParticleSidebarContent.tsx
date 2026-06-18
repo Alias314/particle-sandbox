@@ -18,6 +18,14 @@ export default function ParticleSidebarContent({
   const [amountParticles, setAmountParticles] = useState(generation.amountCube);
   const [cubeSpeed, setCubeSpeed] = useState(cube.speed);
   const [cubeSize, setCubeSize] = useState([cube.minSize, cube.maxSize]);
+  const [cubeRadius, setCubeRadius] = useState([
+    cube.minRadius,
+    cube.maxRadius,
+  ]);
+  const [cubeHeight, setCubeHeight] = useState([
+    cube.minHeight,
+    cube.maxHeight,
+  ]);
   const [cubeSpawnPositionRange, setCubeSpawnPositionRange] = useState(
     cube.spawnPositionRange,
   );
@@ -90,23 +98,59 @@ export default function ParticleSidebarContent({
         />
       </SidebarMenuItem>
 
-      <SidebarMenuItem>
-        <SettingSlider
-          label={"Size"}
-          defaultValue={cubeSize}
-          min={0.05}
-          max={1}
-          step={0.01}
-          setValueLabel={setCubeSize}
-          onUpdate={(newValue) => {
-            cube.minSize = newValue[0];
-            cube.maxSize = newValue[1];
-          }}
-          tooltip={
-            "Modifies the minimum and maximum size of a particle. Particles will have sizes in the range of the minimum and maximum sizes. Generate particles for changes to apply."
-          }
-        />
-      </SidebarMenuItem>
+      {particleShape === "cone" ? (
+        <SidebarMenuItem key="cone size slider" className="flex flex-col gap-4">
+          <SettingSlider
+            label={"Base Radius"}
+            defaultValue={cubeRadius}
+            min={0.01}
+            max={1}
+            step={0.01}
+            setValueLabel={setCubeRadius}
+            onUpdate={(newValue) => {
+              cube.minRadius = newValue[0];
+              cube.maxRadius = newValue[1];
+            }}
+            tooltip={
+              "The range of which a particle is positioned on generation from the origin. A range of 10 means that a particle will spawn anywhere within 10 units from the origin."
+            }
+          />
+
+          <SettingSlider
+            label={"Height"}
+            defaultValue={cubeHeight}
+            min={0.01}
+            max={1}
+            step={0.01}
+            setValueLabel={setCubeHeight}
+            onUpdate={(newValue) => {
+              cube.minHeight = newValue[0];
+              cube.maxHeight = newValue[1];
+            }}
+            tooltip={
+              "The range of which a particle is positioned on generation from the origin. A range of 10 means that a particle will spawn anywhere within 10 units from the origin."
+            }
+          />
+        </SidebarMenuItem>
+      ) : (
+        <SidebarMenuItem key="other shapes size slider">
+          <SettingSlider
+            label={"Size"}
+            defaultValue={cubeSize}
+            min={0.01}
+            max={1}
+            step={0.01}
+            setValueLabel={setCubeSize}
+            onUpdate={(newValue) => {
+              cube.minSize = newValue[0];
+              cube.maxSize = newValue[1];
+            }}
+            tooltip={
+              "Modifies the minimum and maximum size of a particle. Particles will have sizes in the range of the minimum and maximum sizes. Generate particles for changes to apply."
+            }
+          />
+        </SidebarMenuItem>
+      )}
 
       <SidebarMenuItem>
         <SettingSlider

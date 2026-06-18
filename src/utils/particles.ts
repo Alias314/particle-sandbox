@@ -39,6 +39,8 @@ export const generateParticles = (particleAttributes) => {
   for (let i = 0; i < particleAttributes.cube.length; i++) {
     if (i < generation.amountCube) {
       particleAttributes.cube[i].size = getRandomNumFromRange(cube.minSize, cube.maxSize);
+      particleAttributes.cube[i].radius = getRandomNumFromRange(cube.minRadius, cube.maxRadius);
+      particleAttributes.cube[i].height = getRandomNumFromRange(cube.minHeight, cube.maxHeight);
       particleAttributes.cube[i].position = getRandomPosition(cube.spawnPositionRange);
       particleAttributes.cube[i].isVisible = true;
     } else {
