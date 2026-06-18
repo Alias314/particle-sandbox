@@ -18,13 +18,13 @@ import {
 import { Button } from "./ui/button";
 
 const slides = [
-  "/gifs/carousel/slide-1.gif",
-  "/gifs/carousel/slide-2.gif",
-  "/gifs/carousel/slide-3.gif",
-  "/gifs/carousel/slide-4.gif",
-  "/gifs/carousel/slide-5.gif",
-  "/gifs/carousel/slide-6.gif",
-  "/gifs/carousel/slide-7.gif",
+  "/video/carousel/slide-1.mp4",
+  "/video/carousel/slide-2.mp4",
+  "/video/carousel/slide-3.mp4",
+  "/video/carousel/slide-4.mp4",
+  "/video/carousel/slide-5.mp4",
+  "/video/carousel/slide-6.mp4",
+  "/video/carousel/slide-7.mp4",
 ];
 
 export default function SplashCard({ onClose }) {
@@ -42,9 +42,13 @@ export default function SplashCard({ onClose }) {
               {slides.map((slide) => (
                 <CarouselItem key={slide}>
                   <AspectRatio ratio={16 / 9}>
-                    <img
+                    <video 
+                      className="w-full h-full object-cover rounded-md pointer-events-none"
                       src={slide}
-                      className="w-full h-full object-cover rounded-md"
+                      autoPlay
+                      muted
+                      loop
+                      playsInline
                     />
                   </AspectRatio>
                 </CarouselItem>
