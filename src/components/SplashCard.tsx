@@ -16,6 +16,7 @@ import {
   CarouselPrevious,
 } from "./ui/carousel";
 import { Button } from "./ui/button";
+import VideoSlide from "./VideoSlide";
 
 const slides = [
   "/video/carousel/slide-1.mp4",
@@ -29,27 +30,15 @@ const slides = [
 
 export default function SplashCard({ onClose }) {
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60">
-      <Card className="h-full w-[40%] bg-white overflow-visible rounded-none bg-white shadow-lg shadow-white">
+    <div className="fixed inset-0 z-50 flex items-center justify-center">
+      <Card className="h-auto w-2xl overflow-visible rounded-none bg-white rounded-md">
         <CardHeader className="flex flex-col">
-          <CardAction className="relative right-0 ml-auto">
-            <Button className="bg-white" variant="ghost" onClick={onClose}>
-              <X className="size-6 text-gray-950" />
-            </Button>
-          </CardAction>
-          <Carousel className="w-2xl mx-auto overflow-hidden">
+          <Carousel className="w-full mx-auto overflow-hidden">
             <CarouselContent>
               {slides.map((slide) => (
                 <CarouselItem key={slide}>
                   <AspectRatio ratio={16 / 9}>
-                    <video 
-                      className="w-full h-full object-cover rounded-md pointer-events-none"
-                      src={slide}
-                      autoPlay
-                      muted
-                      loop
-                      playsInline
-                    />
+                    <VideoSlide slide={slide} />
                   </AspectRatio>
                 </CarouselItem>
               ))}
@@ -58,11 +47,11 @@ export default function SplashCard({ onClose }) {
             <CarouselNext className="right-3 [&_svg]:!w-6 [&_svg]:!h-6 bg-black/40 border-none text-white" />
           </Carousel>
         </CardHeader>
-        <CardContent className="px-12">
-          <CardTitle className="text-xl text-center">
+        <CardContent>
+          <CardTitle className="text-xl text-center font-semibold">
             Particle Sandbox
           </CardTitle>
-          <CardDescription className="text-justify text-gray-900">
+          <CardDescription className="text-lg text-justify text-gray-900">
             Ni hao, this a real-time 3D particle simulation and stuff yea. hmm
             this uses the BOIDS algorithm for the particle movement and stuff.
             there a buncha sliders that you can use to tweak the amount of
@@ -70,6 +59,11 @@ export default function SplashCard({ onClose }) {
             particle interacts with other particles and with the black hole (the
             sphere)
           </CardDescription>
+          <CardAction className="mt-10 relative right-0 ml-auto">
+            <Button className="py-4 px-3 text-lg text-white bg-slate-800 hover:bg-slate-700" onClick={onClose}>
+              Get Started
+            </Button>
+          </CardAction>
         </CardContent>
       </Card>
     </div>

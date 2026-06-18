@@ -21,17 +21,17 @@ export default function Dropdown({
     <Select>
       <Tooltip>
         <TooltipTrigger>
-          <Label className="text-xl text-gray-100">{label}</Label>
+          <Label className="text-lg text-gray-100">{label}</Label>
         </TooltipTrigger>
         <TooltipContent className="text-justify" side="left">
           <p className="text-lg">{tooltip}</p>
         </TooltipContent>
       </Tooltip>
-      <SelectTrigger className="w-full text-gray-100 text-xl bg-slate-800 rounded-sm data-placeholder:text-gray-100 focus-visible:ring-0">
+      <SelectTrigger className="w-full text-gray-100 text-lg bg-slate-800 rounded-sm data-placeholder:text-gray-100 focus-visible:ring-0">
         <SelectValue placeholder={titleCase(placeholder.toString())} />
       </SelectTrigger>
       <SelectContent
-        className="text-xl text-gray-100 bg-slate-800 rounded-sm"
+        className="text-lg text-gray-100 bg-slate-800 rounded-sm"
         position="popper"
         align="start"
       >
@@ -39,7 +39,7 @@ export default function Dropdown({
           {list.map((item, key) => (
             <SelectItem
               key={key}
-              className="text-xl"
+              className="text-lg"
               value={item}
               onClick={() => onClick(item)}
             >

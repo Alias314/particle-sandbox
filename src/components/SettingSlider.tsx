@@ -17,14 +17,14 @@ export default function SettingSlider({
       <div className="mb-2 flex justify-between">
         <Tooltip>
           <TooltipTrigger>
-            <Label className="text-xl text-gray-100">{label}</Label>
+            <Label className="text-lg text-gray-100">{label}</Label>
           </TooltipTrigger>
           <TooltipContent className="text-justify" side="left">
             <p className="text-lg">{tooltip}</p>
           </TooltipContent>
         </Tooltip>
 
-        <Label className="text-xl text-gray-100">
+        <Label className="text-lg text-gray-100">
           {Array.isArray(defaultValue)
             ? defaultValue.join(" - ")
             : defaultValue}

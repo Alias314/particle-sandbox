@@ -17,21 +17,23 @@ export default function Dashboard() {
   const [showSplashCard, setShowSplashCard] = useState(true);
 
   return (
-    <SidebarProvider>
-      <div className="relative flex-1 h-screen bg-gray-950 overflow-hidden">
-        <Scene
+    <SidebarProvider className="bg-gray-950">
+      <div className={`flex flex-1 w-full transition-all duration-500 ${showSplashCard && "blur-xs"}`}>
+        <div className="relative flex-1 h-screen overflow-hidden">
+          <Scene
+            particleAttributes={particleAttributesRef.current}
+            sceneSettings={sceneSettings}
+            particleShape={particleShape}
+          />
+        </div>
+
+        <AppSidebar
           particleAttributes={particleAttributesRef.current}
-          sceneSettings={sceneSettings}
           particleShape={particleShape}
+          setParticleShape={setParticleShape}
+          setSceneSettings={setSceneSettings}
         />
       </div>
-
-      <AppSidebar
-        particleAttributes={particleAttributesRef.current}
-        particleShape={particleShape}
-        setParticleShape={setParticleShape}
-        setSceneSettings={setSceneSettings}
-      />
 
       {showSplashCard && (
         <SplashCard onClose={() => setShowSplashCard(false)} />
