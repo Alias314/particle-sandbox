@@ -36,7 +36,9 @@ export default function ParticleSidebarContent() {
           placeholder={sphere.movement}
           list={sphereMovements}
           label={"Sphere Movement"}
-          tooltip={"Lorem ipsum"}
+          tooltip={
+            "Sets how the sphere moves around the scene (e.g. following the cursor, circling, or tracing a figure 8)."
+          }
           onClick={(movement) => (sphere.movement = movement)}
         />
       </SidebarMenuItem>
@@ -50,9 +52,7 @@ export default function ParticleSidebarContent() {
           step={0.01}
           setValueLabel={setSphereSize}
           onUpdate={(newValue) => (sphere.size = newValue[0])}
-          tooltip={
-            "The range of which a particle is positioned on generation from the origin. A range of 10 means that a particle will spawn anywhere within 10 units from the origin."
-          }
+          tooltip={"Sets the size of the sphere."}
         />
       </SidebarMenuItem>
 
@@ -66,7 +66,7 @@ export default function ParticleSidebarContent() {
           setValueLabel={setSphereSpeed}
           onUpdate={(newValue) => (sphere.speed = newValue[0])}
           tooltip={
-            "The range of which a particle is positioned on generation from the origin. A range of 10 means that a particle will spawn anywhere within 10 units from the origin."
+            "Sets how fast the sphere moves (only applies to circle and figure 8 movement)."
           }
         />
       </SidebarMenuItem>
@@ -81,7 +81,7 @@ export default function ParticleSidebarContent() {
           setValueLabel={setSphereMovementRadius}
           onUpdate={(newValue) => (sphere.radius = newValue[0])}
           tooltip={
-            "The range of which a particle is positioned on generation from the origin. A range of 10 means that a particle will spawn anywhere within 10 units from the origin."
+            "Sets the size of the path the sphere moves along (only applies to circle and figure 8 movement)."
           }
         />
       </SidebarMenuItem>
@@ -96,7 +96,7 @@ export default function ParticleSidebarContent() {
           setValueLabel={setSphereCohesionRadius}
           onUpdate={(newValue) => (boids.sphereCohesionRadius = newValue[0])}
           tooltip={
-            "The range of which a particle is positioned on generation from the origin. A range of 10 means that a particle will spawn anywhere within 10 units from the origin."
+            "Sets how far particles look to group toward the sphere."
           }
         />
       </SidebarMenuItem>
@@ -111,7 +111,7 @@ export default function ParticleSidebarContent() {
           setValueLabel={setSphereCohesionStrength}
           onUpdate={(newValue) => (boids.sphereCohesionStrength = newValue[0])}
           tooltip={
-            "The range of which a particle is positioned on generation from the origin. A range of 10 means that a particle will spawn anywhere within 10 units from the origin."
+            "Sets how strongly particles steer toward the sphere to group with it."
           }
         />
       </SidebarMenuItem>
@@ -126,7 +126,7 @@ export default function ParticleSidebarContent() {
           setValueLabel={setSphereSeparationRadius}
           onUpdate={(newValue) => (boids.sphereSeparationRadius = newValue[0])}
           tooltip={
-            "The range of which a particle is positioned on generation from the origin. A range of 10 means that a particle will spawn anywhere within 10 units from the origin."
+            "Sets how far particles look to avoid the sphere."
           }
         />
       </SidebarMenuItem>
@@ -143,7 +143,7 @@ export default function ParticleSidebarContent() {
             (boids.sphereSeparationStrength = newValue[0])
           }
           tooltip={
-            "The range of which a particle is positioned on generation from the origin. A range of 10 means that a particle will spawn anywhere within 10 units from the origin."
+            "Sets how strongly particles steer away from the sphere to avoid it."
           }
         />
       </SidebarMenuItem>

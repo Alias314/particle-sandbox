@@ -55,7 +55,7 @@ export default function ParticleSidebarContent({
           placeholder={particleShape}
           list={particleShapes}
           label={"Particle Shape"}
-          tooltip={"lorem ipsum"}
+          tooltip={"Sets the geometric shape used for every particle."}
           onClick={(shape) => setParticleShape(shape)}
         />
       </SidebarMenuItem>
@@ -65,7 +65,9 @@ export default function ParticleSidebarContent({
           placeholder={cube.rotation}
           list={particleRotations}
           label={"Particle Rotation"}
-          tooltip={"lorem ipsum"}
+          tooltip={
+            "Sets how particles orient themselves as they move (e.g. facing their movement direction, facing the sphere, spinning freely, or staying fixed)."
+          }
           onClick={(rotation) => (cube.rotation = rotation)}
         />
       </SidebarMenuItem>
@@ -80,7 +82,14 @@ export default function ParticleSidebarContent({
           setValueLabel={setAmountParticles}
           onUpdate={(newValue) => (generation.amountCube = newValue[0])}
           tooltip={
-            "Modifies the amount of particles. Generate particles for changes to apply."
+            <>
+              Sets how many particles will spawn.{" "}
+              <span className="text-red-500 font-semibold">
+                <br />
+                <br />
+                Requires generating particles again to apply.
+              </span>
+            </>
           }
         />
       </SidebarMenuItem>
@@ -94,7 +103,7 @@ export default function ParticleSidebarContent({
           step={0.1}
           setValueLabel={setCubeSpeed}
           onUpdate={(newValue) => (cube.speed = newValue[0])}
-          tooltip={"Multiplier for particle speed"}
+          tooltip={"Sets how fast particles move."}
         />
       </SidebarMenuItem>
 
@@ -112,7 +121,15 @@ export default function ParticleSidebarContent({
               cube.maxRadius = newValue[1];
             }}
             tooltip={
-              "The range of which a particle is positioned on generation from the origin. A range of 10 means that a particle will spawn anywhere within 10 units from the origin."
+              <>
+                Sets the min/max base radius of each cone particle. Each
+                particle gets a random radius within this range.{" "}
+                <span className="text-red-500 font-semibold">
+                  <br />
+                  <br />
+                  Requires generating particles again to apply.
+                </span>
+              </>
             }
           />
 
@@ -128,7 +145,15 @@ export default function ParticleSidebarContent({
               cube.maxHeight = newValue[1];
             }}
             tooltip={
-              "The range of which a particle is positioned on generation from the origin. A range of 10 means that a particle will spawn anywhere within 10 units from the origin."
+              <>
+                Sets the min/max height of each cone particle. Each particle
+                gets a random height within this range.{" "}
+                <span className="text-red-500 font-semibold">
+                  <br />
+                  <br />
+                  Requires generating particles again to apply.
+                </span>
+              </>
             }
           />
         </SidebarMenuItem>
@@ -146,7 +171,15 @@ export default function ParticleSidebarContent({
               cube.maxSize = newValue[1];
             }}
             tooltip={
-              "Modifies the minimum and maximum size of a particle. Particles will have sizes in the range of the minimum and maximum sizes. Generate particles for changes to apply."
+              <>
+                Sets the min/max size of each particle. Each particle gets a
+                random size within this range.{" "}
+                <span className="text-red-500 font-semibold">
+                  <br />
+                  <br />
+                  Requires generating particles again to apply.
+                </span>
+              </>
             }
           />
         </SidebarMenuItem>
@@ -162,7 +195,15 @@ export default function ParticleSidebarContent({
           setValueLabel={setCubeSpawnPositionRange}
           onUpdate={(newValue) => (cube.spawnPositionRange = newValue[0])}
           tooltip={
-            "The range of which a particle is positioned on generation from the origin. A range of 10 means that a particle will spawn anywhere within 10 units from the origin."
+            <>
+              Sets how far from the origin particles can spawn. A range of 10
+              means a particle can spawn anywhere within 10 units of the origin.{" "}
+              <span className="text-red-500 font-semibold">
+                <br />
+                <br />
+                Requires generating particles again to apply.
+              </span>
+            </>
           }
         />
       </SidebarMenuItem>
@@ -177,7 +218,7 @@ export default function ParticleSidebarContent({
           setValueLabel={setParticleAlignmentRadius}
           onUpdate={(newValue) => (boids.particleAlignmentRadius = newValue[0])}
           tooltip={
-            "The range of which a particle is positioned on generation from the origin. A range of 10 means that a particle will spawn anywhere within 10 units from the origin."
+            "Sets how far a particle looks to match the direction of nearby particles."
           }
         />
       </SidebarMenuItem>
@@ -194,7 +235,7 @@ export default function ParticleSidebarContent({
             (boids.particleAlignmentStrength = newValue[0])
           }
           tooltip={
-            "The range of which a particle is positioned on generation from the origin. A range of 10 means that a particle will spawn anywhere within 10 units from the origin."
+            "Sets how strongly a particle steers to match the direction of nearby particles."
           }
         />
       </SidebarMenuItem>
@@ -209,7 +250,7 @@ export default function ParticleSidebarContent({
           setValueLabel={setParticleCohesionRadius}
           onUpdate={(newValue) => (boids.particleCohesionRadius = newValue[0])}
           tooltip={
-            "The range of which a particle is positioned on generation from the origin. A range of 10 means that a particle will spawn anywhere within 10 units from the origin."
+            "Sets how far a particle looks to group together with nearby particles."
           }
         />
       </SidebarMenuItem>
@@ -226,7 +267,7 @@ export default function ParticleSidebarContent({
             (boids.particleCohesionStrength = newValue[0])
           }
           tooltip={
-            "The range of which a particle is positioned on generation from the origin. A range of 10 means that a particle will spawn anywhere within 10 units from the origin."
+            "Sets how strongly a particle steers toward nearby particles to group with them."
           }
         />
       </SidebarMenuItem>
@@ -243,7 +284,7 @@ export default function ParticleSidebarContent({
             (boids.particleSeparationRadius = newValue[0])
           }
           tooltip={
-            "The range of which a particle is positioned on generation from the origin. A range of 10 means that a particle will spawn anywhere within 10 units from the origin."
+            "Sets how far a particle looks to avoid crowding nearby particles."
           }
         />
       </SidebarMenuItem>
@@ -260,7 +301,7 @@ export default function ParticleSidebarContent({
             (boids.particleSeparationStrength = newValue[0])
           }
           tooltip={
-            "The range of which a particle is positioned on generation from the origin. A range of 10 means that a particle will spawn anywhere within 10 units from the origin."
+            "Sets how strongly a particle steers away from nearby particles to avoid crowding."
           }
         />
       </SidebarMenuItem>

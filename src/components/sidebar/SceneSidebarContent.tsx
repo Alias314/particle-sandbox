@@ -29,7 +29,7 @@ export default function ParticleSidebarContent({ setSceneSettings }) {
           placeholder={defaultSceneSettings.displayStars}
           list={[true, false]}
           label={"Display Stars"}
-          tooltip={"Lorem ipsum"}
+          tooltip={"Toggles a starfield background on or off."}
           onClick={(value) =>
             setSceneSettings((prev) => ({ ...prev, displayStars: value }))
           }
@@ -41,7 +41,7 @@ export default function ParticleSidebarContent({ setSceneSettings }) {
           placeholder={defaultSceneSettings.displayGrid}
           list={[true, false]}
           label={"Display Grid"}
-          tooltip={"Lorem ipsum"}
+          tooltip={"Toggles a reference grid on the scene floor on or off."}
           onClick={(value) =>
             setSceneSettings((prev) => ({ ...prev, displayGrid: value }))
           }
@@ -53,7 +53,7 @@ export default function ParticleSidebarContent({ setSceneSettings }) {
           placeholder={defaultSceneSettings.displayBloom}
           list={[true, false]}
           label={"Enable Bloom"}
-          tooltip={"Lorem ipsum"}
+          tooltip={"Toggles the glow/bloom post-processing effect on bright areas of the scene."}
           onClick={(value) =>
             setSceneSettings((prev) => ({ ...prev, displayBloom: value }))
           }
@@ -65,7 +65,7 @@ export default function ParticleSidebarContent({ setSceneSettings }) {
           placeholder={defaultSceneSettings.enablePointLight}
           list={[true, false]}
           label={"Enable Point Light"}
-          tooltip={"Lorem ipsum"}
+          tooltip={"Toggles the point light (attached to the sphere) on or off."}
           onClick={(value) =>
             setSceneSettings((prev) => ({ ...prev, enablePointLight: value }))
           }
@@ -77,7 +77,7 @@ export default function ParticleSidebarContent({ setSceneSettings }) {
           placeholder={defaultSceneSettings.enableAmbientLight}
           list={[true, false]}
           label={"Enable Ambient Light"}
-          tooltip={"Lorem ipsum"}
+          tooltip={"Toggles ambient (scene-wide) lighting on or off."}
           onClick={(value) =>
             setSceneSettings((prev) => ({ ...prev, enableAmbientLight: value }))
           }
@@ -98,7 +98,7 @@ export default function ParticleSidebarContent({ setSceneSettings }) {
               pointLightIntensity: value,
             }))
           }
-          tooltip={"Lorem ipsum"}
+          tooltip={"Sets the brightness of the point light."}
         />
       </SidebarMenuItem>
 
@@ -116,7 +116,7 @@ export default function ParticleSidebarContent({ setSceneSettings }) {
               ambientLightIntensity: value,
             }))
           }
-          tooltip={"Lorem ipsum"}
+          tooltip={"Sets the brightness of the ambient light."}
         />
       </SidebarMenuItem>
     </SidebarMenu>
