@@ -53,7 +53,7 @@ export default function SplashCard({ onClose }) {
           </CardTitle>
           <CardDescription className="px-2 text-justify text-gray-900">
             Welcome to the Particle Sandbox, a real-time 3D simulation driven by
-            the BOIDS flocking algorithm. Play with the sliders to change how
+            the Boids flocking algorithm. Play with the sliders to change how
             many particles spawn, how they move, and how they're pulled toward
             (or pushed from) the black hole. If you're curious on what some of
             the sliders do, just hover on the label of each slider.
