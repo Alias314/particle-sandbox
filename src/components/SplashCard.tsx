@@ -52,15 +52,17 @@ export default function SplashCard({ onClose }) {
             Particle Sandbox
           </CardTitle>
           <CardDescription className="px-2 text-justify text-gray-900">
-            Ni hao, this a real-time 3D particle simulation and stuff yea. hmm
-            this uses the BOIDS algorithm for the particle movement and stuff.
-            there a buncha sliders that you can use to tweak the amount of
-            particles, its movement patterns, and even sliders for how the
-            particle interacts with other particles and with the black hole (the
-            sphere)
+            Welcome to the Particle Sandbox, a real-time 3D simulation driven by
+            the BOIDS flocking algorithm. Play with the sliders to change how
+            many particles spawn, how they move, and how they're pulled toward
+            (or pushed from) the black hole. If you're curious on what some of
+            the sliders do, just hover on the label of each slider.
           </CardDescription>
           <CardAction className="mt-10 relative right-0 ml-auto">
-            <Button className="py-4 px-3 text-lg text-white bg-slate-800 hover:bg-slate-700" onClick={onClose}>
+            <Button
+              className="py-4 px-3 text-lg text-white bg-slate-800 hover:bg-slate-700"
+              onClick={onClose}
+            >
               Get Started
             </Button>
           </CardAction>

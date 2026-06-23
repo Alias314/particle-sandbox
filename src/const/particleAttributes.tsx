@@ -7,7 +7,7 @@ export const cube = {
   maxHeight: 0.25,
   minSize: 0.02,
   maxSize: 0.14,
-  speed: 1,
+  speed: 2,
   spawnPositionRange: 5,
 };
 
